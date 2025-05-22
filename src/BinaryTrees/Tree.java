@@ -61,4 +61,57 @@ public class Tree {
         return false;
     }
 
+    public void preOderTraversal(){
+        preOderTraversal(rootNode);
+    }
+
+    private void preOderTraversal(Node node){
+    if(node == null){
+        return;
+    }
+        System.out.println(node.value);
+        preOderTraversal(node.leftChild);
+        preOderTraversal(node.rightChild);
+    }
+
+
+    public void inOderTraversal(){
+        inOderTraversal(rootNode);
+    }
+
+    private void inOderTraversal(Node node){
+        if(node == null) {
+            return;
+        }
+        inOderTraversal(node.leftChild);
+        System.out.println(node.value);
+        inOderTraversal(node.rightChild);
+    }
+
+    public void postOderTraversal(){
+        postOderTraversal(rootNode);
+    }
+
+    private void postOderTraversal(Node node){
+        if(node == null) {
+            return;
+        }
+        postOderTraversal(node.leftChild);
+        postOderTraversal(node.rightChild);
+        System.out.println(node.value);
+    }
+
+    public int height(){
+        return height(  rootNode );
+    }
+
+    public int height( Node node ){
+        if(node == null)
+            return -1;
+
+        if(node.rightChild == null && node.leftChild == null)
+            return 0;
+        return 1 + Math.max(height(node.rightChild) , height(node.leftChild));
+    }
+
 }

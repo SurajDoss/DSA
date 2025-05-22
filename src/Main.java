@@ -18,5 +18,15 @@ public class Main {
         tree.insert(12);
         tree.insert(3);
         System.out.println(tree.find(220));
+
+        System.out.println("\n");
+        tree.preOderTraversal();
+        System.out.println("\n");
+        tree.inOderTraversal();
+        System.out.println("\n");
+        tree.postOderTraversal();
+
+        System.out.println("\n");
+        System.out.println(tree.height());
     }
 }
