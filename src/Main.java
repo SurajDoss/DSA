@@ -28,5 +28,8 @@ public class Main {
 
         System.out.println("\n");
         System.out.println(tree.height());
+
+        System.out.println("\n");
+        System.out.println(tree.min());
     }
 }

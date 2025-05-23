@@ -109,9 +109,44 @@ public class Tree {
         if(node == null)
             return -1;
 
-        if(node.rightChild == null && node.leftChild == null)
+        if(isLeaf(node))
             return 0;
         return 1 + Math.max(height(node.rightChild) , height(node.leftChild));
     }
 
+    private boolean isLeaf(Node root){
+        return root.leftChild == null && root.rightChild == null;
+    }
+
+    //O(log n)
+    public int min(){
+        if(rootNode == null)
+            throw new IllegalStateException();
+
+        var current = rootNode;
+        var last = current;
+        while(current != null){
+            last = current;
+            current = current.leftChild;
+
+        }
+
+        return last.value;
+//        return min(rootNode);
+    }
+
+    //O(N)
+    private int min(Node root){
+        if (root == null)
+            return Integer.MAX_VALUE;
+
+        if( isLeaf(root)){
+            return root.value;
+        }
+        var leftChild = min(root.leftChild);
+        var rightChild= min(root.rightChild);
+
+        return  Math.min( Math.min(leftChild, rightChild), root.value);
+
+    }
 }
