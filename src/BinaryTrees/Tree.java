@@ -149,4 +149,24 @@ public class Tree {
         return  Math.min( Math.min(leftChild, rightChild), root.value);
 
     }
+
+    public boolean equals(Tree other){
+        if(other == null){
+            return false;
+        }
+        return equals(rootNode, other.rootNode);
+    }
+
+    public boolean equals(Node first, Node second){
+        if(first == null && second == null)
+            return true;
+
+        if(first != null && second != null){
+            return first.value == second.value
+                    && equals(first.leftChild, second.leftChild)
+                    && equals(first.rightChild, second.rightChild);
+        }
+
+        return false;
+    }
 }

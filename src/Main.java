@@ -29,7 +29,21 @@ public class Main {
         System.out.println("\n");
         System.out.println(tree.height());
 
+
         System.out.println("\n");
         System.out.println(tree.min());
+
+        Tree tree1 = new Tree();
+
+        tree1.insert(10);
+
+        tree1.insert(2);
+        tree1.insert(12);
+        tree1.insert(3);
+
+        System.out.println("\n");
+        System.out.println(tree.equals(tree1));
+
+
     }
 }
