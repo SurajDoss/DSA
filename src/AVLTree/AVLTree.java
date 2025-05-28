@@ -9,6 +9,7 @@ public class AVLTree {
         private AVLNode leftChild;
         private AVLNode rightChild;
         private int height;
+        private int balanceFactor;
 
         AVLNode(int value){
             this.value = value;
@@ -29,7 +30,7 @@ public class AVLTree {
         if(rootNode == null){
             rootNode = node;
         }else{
-            insert(rootNode, node );
+            rootNode = insert(rootNode, node );
         }
 
     }
@@ -39,7 +40,7 @@ public class AVLTree {
     }
 
     private int height( AVLNode node ){
-        if(rootNode == null)
+        if(node == null)
             return -1;
 
         if(isLeaf(node))
@@ -52,7 +53,7 @@ public class AVLTree {
         return root.leftChild == null && root.rightChild == null;
     }
 
-    private void insert(AVLNode currentNode, AVLNode insertingNode ){
+    private AVLNode insert(AVLNode currentNode, AVLNode insertingNode ){
         if (insertingNode.value < currentNode.value) {
             if (currentNode.leftChild == null) {
                 currentNode.leftChild = insertingNode;
@@ -67,10 +68,59 @@ public class AVLTree {
             }
         }
 
-        currentNode.height = Math.max(calculatHeight(currentNode.leftChild), calculatHeight(currentNode.rightChild)) + 1;
+        currentNode.height = Math.max( calculatHeight(currentNode.leftChild), calculatHeight(currentNode.rightChild)) + 1;
+
+        currentNode.balanceFactor = balanceFactor(currentNode);
+
+        return balance( currentNode);
+    }
+
+    private AVLNode balance(AVLNode currentNode){
+        if(currentNode.balanceFactor > 1 ){
+            System.out.println("Left is Heavy");
+            if(balanceFactor(currentNode.leftChild) < 0)
+                currentNode.leftChild = rotateLeft(currentNode.leftChild); // System.out.println("Left Rotation "+ currentNode.leftChild.value);
+            return rotateRight(currentNode); //System.out.println("Right Rotation " + currentNode.value);
+        }else if( currentNode.balanceFactor < -1){
+            System.out.println("Right is Heavy");
+            if(balanceFactor(currentNode.rightChild) > 0 )
+                currentNode.rightChild = rotateRight(currentNode.rightChild);// System.out.println("Right Rotation " + currentNode.rightChild.value);
+            return rotateLeft(currentNode); //System.out.println("Left Rotation " + currentNode.value);
+        }
+
+        return currentNode;
+    }
+
+    private int balanceFactor(AVLNode node){
+        return node == null ? 0 : calculatHeight(node.leftChild) - calculatHeight(node.rightChild);
     }
 
     private int calculatHeight(AVLNode node){
         return (node != null) ? node.height : -1;
+    }
+
+    private AVLNode rotateRight(AVLNode node){
+        AVLNode newAVLNode = node.leftChild;
+
+        node.leftChild = newAVLNode.rightChild;
+        newAVLNode.rightChild = node;
+
+        setHeight(node);
+        setHeight(newAVLNode);
+        return newAVLNode;
+    }
+
+    private AVLNode rotateLeft(AVLNode node){
+        AVLNode newRoot = node.rightChild;
+
+        node.rightChild = newRoot.leftChild;
+        newRoot.leftChild = node;
+
+        setHeight(node);
+        setHeight(newRoot);
+        return newRoot;
+    }
+    private void setHeight(AVLNode node){
+        node.height = Math.max( height(node.leftChild), height(node.rightChild))+1;
     }
 }
