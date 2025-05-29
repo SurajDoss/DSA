@@ -1,5 +1,6 @@
 import AVLTree.AVLTree;
 import BinaryTrees.Tree;
+import Heaps.Heap;
 
 public class Main {
     public static void main(String[] args) {
@@ -7,7 +8,8 @@ public class Main {
 
         //Test the tree DS
 //        testTree();
-        testAVLTree();
+//        testAVLTree();
+        testHeap();
     }
 
     private static void testTree(){
@@ -57,5 +59,15 @@ public class Main {
         tree.insert(20);
         System.out.println(tree);
 
+    }
+
+    private static void testHeap(){
+        Heap heap = new Heap();
+
+        heap.insert(10);
+        heap.insert(5);
+        heap.insert(17);
+        heap.insert(4);
+        heap.insert(22);
     }
 }
