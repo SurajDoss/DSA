@@ -1,6 +1,9 @@
 import AVLTree.AVLTree;
 import BinaryTrees.Tree;
 import Heaps.Heap;
+import Heaps.MaxHeap;
+
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,7 +12,8 @@ public class Main {
         //Test the tree DS
 //        testTree();
 //        testAVLTree();
-        testHeap();
+//        testHeap();
+        testHeapify();
     }
 
     private static void testTree(){
@@ -71,5 +75,12 @@ public class Main {
         heap.insert(22);
 
         heap.remove();
+    }
+
+    private static void testHeapify(){
+        int[] numbers = {5, 3, 8, 4, 1, 2};
+        MaxHeap.heapify(numbers);
+
+        System.out.println(Arrays.toString(numbers));
     }
 }

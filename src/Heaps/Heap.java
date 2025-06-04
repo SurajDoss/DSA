@@ -78,10 +78,12 @@ public class Heap {
             return true;
         }
 
-        if (!hasRightChild(index))
-            return items[index] >= leftChild(index);
+        var isValid = items[index] >= leftChild(index);
 
-        return  items[index] >= leftChild(index) && items[index] >= rightChild(index);
+        if (!hasRightChild(index))
+            return isValid &= items[index] >= rightChild(index);
+
+        return  isValid;
     }
 
     private int leftChild(int index){
