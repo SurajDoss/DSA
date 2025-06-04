@@ -2,7 +2,8 @@ package Heaps;
 
 public class MaxHeap {
     public static void heapify( int[] array ){
-        for(var i = 0; i < array.length; i++){
+        var lastParent = ((array.length / 2) - 1);
+        for(var i = lastParent; i >= 0; i--){
             heapify(array, i);
         }
     }
